@@ -1,0 +1,14 @@
+<!-- web.xml -->
+<web-app>
+    <servlet>
+        <servlet-name>FinderServlet</servlet-name>
+        <servlet-class>org.acme.FinderServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+        <multipart-config>
+            <location>/tmp</location>
+            <max-file-size>5242880</max-file-size>
+            <max-request-size>20971520</max-request-size>
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+</web-app>
