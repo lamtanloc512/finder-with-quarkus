@@ -1,4 +1,4 @@
-package org.acme.dto;
+package org.acme.system.file;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileDTO implements Serializable {
+public class File extends Node implements Serializable {
     String name;
     String location;
     String type;
@@ -48,14 +48,14 @@ public class FileDTO implements Serializable {
             this.fileSize = fileSize;
             return this;
         }
-        public FileDTO build() {
-            FileDTO fileDTO = new FileDTO();
-            fileDTO.fileSize = this.fileSize;
-            fileDTO.type = this.type;
-            fileDTO.bytes = this.bytes;
-            fileDTO.location = this.location;
-            fileDTO.name = this.name;
-            return fileDTO;
+        public File build() {
+            File file = new File();
+            file.fileSize = this.fileSize;
+            file.type = this.type;
+            file.bytes = this.bytes;
+            file.location = this.location;
+            file.name = this.name;
+            return file;
         }
     }
 }

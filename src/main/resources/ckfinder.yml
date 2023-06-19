@@ -1,4 +1,4 @@
-licenseName: 'localhost'
+licenseName: 'https://localhost:8080/'
 licenseKey: 'CCYC66N558D7P6L5CVPK4EKD6RUFB'
 roleSessionAttribute: 'CKFinder_UserRole'
 serveStaticResources: true
