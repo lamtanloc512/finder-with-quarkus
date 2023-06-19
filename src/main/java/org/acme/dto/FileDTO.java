@@ -1,16 +1,20 @@
 package org.acme.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
-public class FileDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class FileDTO implements Serializable {
     String name;
     String location;
     String type;
     byte[] bytes;
     double fileSize;
-
-
     public static final class FileDTOBuilder {
         private String name;
         private String location;
@@ -24,32 +28,26 @@ public class FileDTO {
         public static FileDTOBuilder newFileDTOBuilder() {
             return new FileDTOBuilder();
         }
-
         public FileDTOBuilder withName(String name) {
             this.name = name;
             return this;
         }
-
         public FileDTOBuilder withLocation(String location) {
             this.location = location;
             return this;
         }
-
         public FileDTOBuilder withType(String type) {
             this.type = type;
             return this;
         }
-
         public FileDTOBuilder withBytes(byte[] bytes) {
             this.bytes = bytes;
             return this;
         }
-
         public FileDTOBuilder withFileSize(double fileSize) {
             this.fileSize = fileSize;
             return this;
         }
-
         public FileDTO build() {
             FileDTO fileDTO = new FileDTO();
             fileDTO.fileSize = this.fileSize;
@@ -60,5 +58,4 @@ public class FileDTO {
             return fileDTO;
         }
     }
-
 }

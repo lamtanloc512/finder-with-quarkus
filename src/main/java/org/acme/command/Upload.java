@@ -30,7 +30,6 @@ public class Upload implements Command {
     final String[] supportedImageExtensions = {"jpg", "png", "webp"};
     @Inject
     Config config;
-
     @Override
     public RestResponse<?> handle(FileUpload fileUpload) throws Exception {
         if (fileUpload == null) throw new GeneralException("File is not found", 500);
@@ -43,7 +42,7 @@ public class Upload implements Command {
             try {
                 InputStream inputStream = Files.newInputStream(fileUpload.filePath());
                 if (Files.exists(destination)) {
-                     Files.copy(inputStream, destination, StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(inputStream, destination, StandardCopyOption.REPLACE_EXISTING);
                 }
                 Files.copy(inputStream, destination);
             } catch (Exception e) {
@@ -57,14 +56,10 @@ public class Upload implements Command {
                         .withBytes(new byte[]{})
                         .build();
             }
-
-
             log.info("fileDTO {}", fileDTO);
-
         }
-        return RestResponse.ok(fileDTO);
+        return fileDTO == null ? null : RestResponse.ok(fileDTO);
     }
-
 
     private String generateUniqueFilename(String filename) {
         String baseName = FilenameUtils.getBaseName(filename);
