@@ -17,11 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.quarkus.runtime.util.StringUtil;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 
-@RequestScoped
+@ApplicationScoped
 public class UploadService {
 
     private final Logger log = LoggerFactory.getLogger(UploadService.class);
@@ -55,13 +55,13 @@ public class UploadService {
                 log.error("What is this error: {}", e.getMessage());
                 throw new IOException("Error at process copy file to disk " + e.getMessage().toString());
             } finally {
-                file = File.FileDTOBuilder.newFileDTOBuilder()
-                        .withName(fileUpload.fileName())
-                        .withLocation(destination.toString())
-                        .withFileSize(fileUpload.size())
-                        .withType(fileUpload.contentType())
-                        .withBytes(new byte[] {})
-                        .build();
+                // file = File.FileBuilder.build()
+                // .withName(fileUpload.fileName())
+                // .withLocation(destination.toString())
+                // .withFileSize(fileUpload.size())
+                // .withType(fileUpload.contentType())
+                // .withBytes(new byte[] {})
+                // .build();
                 log.info("fileDTO {}", file);
             }
         }

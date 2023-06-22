@@ -1,8 +1,8 @@
 package org.acme.endpoint;
 
-import org.acme.command.CreateFolder;
 import org.acme.exception.GeneralException;
 import org.acme.services.BrowseService;
+import org.acme.services.FolderService;
 import org.acme.services.UploadService;
 import org.jboss.resteasy.reactive.RestForm;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
@@ -18,17 +18,17 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/finder")
-public class FinderHanlderEndpoint {
-    private static final Logger log = LoggerFactory.getLogger(FinderHanlderEndpoint.class);
+public class FinderHandlerEndpoint {
+    private static final Logger log = LoggerFactory.getLogger(FinderHandlerEndpoint.class);
 
     @Inject
     UploadService uploadService;
 
     @Inject
     BrowseService browseService;
-    
+
     @Inject
-    CreateFolder createFolder;
+    FolderService folderService;
 
     @POST
     @Path("/upload")
@@ -36,7 +36,7 @@ public class FinderHanlderEndpoint {
     public Uni<?> uploadHandler(@RestForm("file") FileUpload file) throws Exception {
         try {
             return Uni.createFrom().item(uploadService.handleSingleUpload(file));
-        } catch (Exception e) {
+        } catch (Exception e) { //
             throw new GeneralException("No match action!", 404);
         }
     }
@@ -47,6 +47,17 @@ public class FinderHanlderEndpoint {
     public Uni<?> browseHandler(@QueryParam("location") String location) throws Exception {
         log.info("browse handler: {}", location);
         return browseService.handleBrowse(location);
+    }
+
+    @POST
+    @Path("/folder")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<?> folderHandler(@QueryParam("folderName") String folderName,
+            @QueryParam("action") String action) throws Exception {
+
+        log.info("folder handler: {}", action);
+        return folderService.handleCreateFolder(folderName, action);
+        
     }
 
 }

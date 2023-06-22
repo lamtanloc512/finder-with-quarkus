@@ -27,9 +27,9 @@ public class ExampleResource {
     @GET
     @Path("reactive")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<Response> helloWorldReactive(){
+    public Uni<Response> helloWorldReactive() {
         return Uni.createFrom()
-                .completionStage(CompletableFuture.supplyAsync(() -> Map.of("payload","Hello")))
+                .completionStage(CompletableFuture.supplyAsync(() -> Map.of("payload", "Hello")))
                 .onItem()
                 .transform(x -> Response.ok(x).build());
     }

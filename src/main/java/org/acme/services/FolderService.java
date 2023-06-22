@@ -1,25 +1,27 @@
-package org.acme.command;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.core.Response;
-import org.acme.config.Config;
+package org.acme.services;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@RequestScoped
-public class CreateFolder implements Command {
+import org.acme.config.Config;
+
+import io.smallrye.mutiny.Uni;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
+
+@ApplicationScoped
+public class FolderService {
+
     @Inject
     Config config;
 
-    @Override
-    public Response handle() throws Exception {
+    public Uni<Response> handleCreateFolder(String folderName, String action) throws Exception {
         try {
-            String folderPath = config.location();
-            Path folder = Paths.get(folderPath);
+            String newFolderPath = config.location() + "/" + folderName;
+            Path folder = Path.of(newFolderPath);
             if (!Files.exists(folder)) {
                 Files.createDirectory(folder);
                 System.out.println("Folder created successfully.");
@@ -28,10 +30,11 @@ public class CreateFolder implements Command {
                 Files.createDirectory(destination);
                 System.out.println("Folder already exists.");
             }
-            return Response.ok("Folder created").build();
+            return Uni.createFrom().item(Response.ok("Folder created").build());
         } catch (IOException e) {
             System.out.println(e);
             throw new IOException(e);
         }
     }
+
 }
