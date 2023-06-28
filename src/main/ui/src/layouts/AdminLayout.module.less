@@ -1,0 +1,24 @@
+@spacing-unit: 4px;
+@gray-1: #f7f8fa;
+@gray-2: #f2f3f5;
+
+.main-layout {
+	height: 100%;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: 1fr;
+	&-header {
+		padding: 2*@spacing-unit 0 !important;
+		border-bottom: 1px solid @gray-2;
+		display: grid;
+		grid-template-rows: 1fr;
+	}
+
+	&-wrapper {
+		height: 100%;
+
+		&-sider {
+			box-shadow: 0 0 1px 1px @gray-2 !important;
+		}
+	}
+}

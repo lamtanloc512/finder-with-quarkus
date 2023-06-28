@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +32,7 @@ public class BrowseService {
         Map<String, List<Node>> finalResponse = new HashMap<>();
         if (Files.exists(folder) && Files.isDirectory(folder)) {
             try (Stream<Path> streamFolder = Files.list(folder)) {
-                finalResponse = streamFolder.map(x -> x.toFile())
+                finalResponse = streamFolder.map(Path::toFile)
                         .map(y -> {
                             if (y.isDirectory()) {
                                 var newFolder = new Folder();
@@ -49,9 +46,7 @@ public class BrowseService {
                             }
                             return null;
                         })
-                        .collect(Collectors.groupingBy(x -> {
-                            return x.getType();
-                        }));
+                        .collect(Collectors.groupingBy(y -> y != null ? y.getType() : NodeType.FILE.toString()));
 
                 // var listFolder = streamFolder
                 // .map(Path::toFile)
@@ -96,9 +91,7 @@ public class BrowseService {
                 System.out.println("Failed to list files: " + e.getMessage());
                 throw new IOException("Failed to list files: " + e.getMessage());
             }
-        } else
-
-        {
+        } else {
             System.out.println("Invalid folder path or folder does not exist. JAVA");
             return Uni.createFrom()
                     .completionStage(CompletableFuture.supplyAsync(() -> Map.of("Error", "Folder doesn't exists!")))
