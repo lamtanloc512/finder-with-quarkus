@@ -1,10 +1,10 @@
-import { Outlet } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout.tsx';
+import WorkspaceView from './views/admin/workspace/index.tsx';
 
 function AdminApp() {
 	return (
 		<AdminLayout>
-			<Outlet />
+			<WorkspaceView />
 		</AdminLayout>
 	);
 }

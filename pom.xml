@@ -50,10 +50,10 @@
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-undertow</artifactId>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>com.cksource</groupId>
             <artifactId>ckfinder3</artifactId>
@@ -88,6 +88,11 @@
             <artifactId>quarkus-openapi-generator</artifactId>
             <version>2.0.0</version>
         </dependency> -->
+        <dependency>
+            <groupId>io.quarkiverse.quinoa</groupId>
+            <artifactId>quarkus-quinoa</artifactId>
+            <version>2.0.5</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -128,7 +133,6 @@
                 <configuration>
                     <systemPropertyVariables>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <!--suppress UnresolvedMavenProperty -->
                         <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
                 </configuration>
@@ -144,10 +148,8 @@
                         </goals>
                         <configuration>
                             <systemPropertyVariables>
-                                <native.image.path>${project.build.directory}/${project.build.finalName}-runner
-                                </native.image.path>
+                                <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
                                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                                <!--suppress UnresolvedMavenProperty -->
                                 <maven.home>${maven.home}</maven.home>
                             </systemPropertyVariables>
                         </configuration>

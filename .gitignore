@@ -1,4 +1,6 @@
 /target
 .idea
-/src/main/ui/node_modules
-/src/main/ui/.env
+/src/main/webui/node_modules
+/src/main/webui/.env
+
+.quinoa

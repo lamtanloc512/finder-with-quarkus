@@ -1,8 +1,7 @@
 import { FC } from 'react';
-import { Outlet } from 'react-router-dom';
 
 type Props = {
-	children?: React.ReactNode | undefined;
+	children?: React.ReactNode;
 };
 
 const MainLayout: FC<Props> = ({ children }) => {
