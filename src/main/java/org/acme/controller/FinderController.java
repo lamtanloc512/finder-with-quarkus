@@ -1,4 +1,4 @@
-package org.acme.endpoint;
+package org.acme.controller;
 
 import org.acme.exception.GeneralException;
 import org.acme.services.BrowseService;
@@ -18,8 +18,8 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/finder")
-public class FinderHandlerEndpoint {
-    private static final Logger log = LoggerFactory.getLogger(FinderHandlerEndpoint.class);
+public class FinderController {
+    private static final Logger log = LoggerFactory.getLogger(FinderController.class);
 
     @Inject
     UploadService uploadService;

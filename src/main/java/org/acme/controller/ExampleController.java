@@ -1,4 +1,7 @@
-package org.acme;
+package org.acme.controller;
+
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
@@ -9,11 +12,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-
 @Path("/hello")
-public class ExampleResource {
+public class ExampleController {
 
     @Inject
     UriInfo uriInfo;
